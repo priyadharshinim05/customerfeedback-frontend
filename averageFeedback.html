@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Average Feedback</title>
+</head>
+<body>
+    <nav>
+        <div class="left">
+            <div class="logo">
+                <img src="https://t4.ftcdn.net/jpg/03/49/04/11/360_F_349041172_7p4d3KBfqpM2fg51vuPq4jhLkkwnnrFk.jpg" alt="Learning Center Logo">
+                <a href="#">LEARNING CENTER</a>
+            </div>
+        </div>
+        <div class="right">
+            <ul id="navLinks">
+                <li><a href="index.html">Feedback</a></li>
+                <li><a href="feedbackList.html">Feedback List</a></li>
+                <li><a href="averageFeedback.html">Average rating</a></li>
+            </ul>
+            <!-- Hamburger Icon -->
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div id="averageRating">
+            <h1 >Average Rating</h1>
+            <div class="rating-description">
+                Here is the overall feedback from all users.
+            </div>
+            <div class="rating-value" id="ratingValue" style="color:#0027b3 ;"></div>
+            <div class="card-footer">
+                Keep sharing your feedback to improve the experience!
+            </div>
+        </div>
+    </div>
+
+    <script>
+        
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        async function fetchAverageRating() {
+            try {
+                // Fetch reviews from the API
+                const response = await fetch('https://customerfeedback-system.onrender.com/api/reviews');
+                
+                // Check if response is OK
+                if (!response.ok) {
+                    throw new Error('Failed to fetch reviews');
+                }
+
+                const reviews = await response.json();
+
+                // Check if there are reviews
+                if (reviews.length === 0) {
+                    document.getElementById('ratingValue').textContent = "No reviews yet.";
+                    return;
+                }
+
+                // Calculate the average rating
+                let totalRating = 0;
+                reviews.forEach(({ rating }) => totalRating += rating);
+                const average = (totalRating / reviews.length).toFixed(2);
+
+                // Set the average rating value
+                const ratingElement = document.getElementById('ratingValue');
+                if (ratingElement) {
+                    ratingElement.textContent = `${average} / 5`; // Show rating out of 5
+                } else {
+                    console.error('Element with id "ratingValue" not found.');
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        
+        fetchAverageRating();
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Customer Feedback</title>
+</head>
+<body>
+    <nav>
+        <div class="left">
+            <div class="logo">
+                <img src="https://t4.ftcdn.net/jpg/03/49/04/11/360_F_349041172_7p4d3KBfqpM2fg51vuPq4jhLkkwnnrFk.jpg" alt="Learning Center Logo">
+                <a href="#">LEARNING CENTER</a>
+            </div>
+        </div>
+        <div class="right">
+            <ul id="navLinks">
+                <li><a href="index.html">Feedback</a></li>
+                <li><a href="feedbackList.html">Feedback List</a></li>
+                <li><a href="averageFeedback.html">Average rating</a></li>
+            </ul>
+            
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+    <br><br>
+    <div class="container">
+        <center><h2 style="color:rgba(0, 0, 255, 0.904)">Rate your experience to help us improve!</h2></center>
+        
+     
+        <form id="feedbackForm">
+            <input type="text" id="username" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <textarea id="feedback" placeholder="Your Feedback" required></textarea>
+            <input type="number" id="rating" placeholder="Rating (1-5)" min="1" max="5" required>
+            <button type="submit">Submit</button>
+        </form>
+
+        
+        <div id="successMessage" style="display:none; color:green;"></div>
+        
+      
+        <div id="feedbackSection" style="display:none;">
+            <div id="averageRating"></div>
+            <div id="feedbackList"></div>
+        </div>
+
+        
+        <div id="marqueeContainer" style="margin-top: 20px; margin-bottom: 0px; width:425px">
+            <marquee behavior="scroll" direction="left" scrollamount="5" style="background-color: rgb(0, 145, 255) ;color:white;">
+                Click on the "Feedback List" to see customer feedback!
+            </marquee>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
